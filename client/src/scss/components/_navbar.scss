@@ -1,0 +1,32 @@
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 8rem;
+	background: $white;
+	box-shadow: 0 0.3rem 3rem rgba(0, 0, 0, 0.1);
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 8rem;
+	}
+	&__left img {
+		width: 6rem;
+	}
+	&__right {
+		display: flex;
+		& li {
+			list-style-type: none;
+			& a {
+				text-decoration: none;
+				font-size: 1.4rem;
+				color: $black;
+				display: block;
+				padding: 0 1.5rem;
+				outline: none;
+			}
+		}
+	}
+}

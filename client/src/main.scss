@@ -1,1 +1,10 @@
 @import 'scss/base/reset';
+
+// import scss abstracts
+@import 'scss/abstracts/variables';
+
+// import scss utils
+@import 'scss/utils/utils';
+
+// import scss components
+@import 'scss/components/navbar';
