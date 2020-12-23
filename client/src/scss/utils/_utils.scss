@@ -2,3 +2,45 @@
 	width: 1200px;
 	margin: 0 auto;
 }
+.mt-80 {
+	margin-top: 8rem;
+}
+.group {
+	margin-bottom: 1.3rem;
+	&__control {
+		width: 100%;
+		padding: 1.5rem;
+		border: none;
+		background: $silver;
+		outline: none;
+		border-bottom: 2px solid transparent;
+		transition: all 0.5s;
+
+		&:focus {
+			border-bottom-color: green;
+		}
+	}
+}
+.btn {
+	text-decoration: none;
+	outline: none;
+	color: $white;
+	height: 4rem;
+	padding: 1.2rem 1rem;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.4rem;
+	border: none;
+	cursor: pointer;
+}
+.btn-default {
+	background: $green;
+}
+.btn-block {
+	width: 100%;
+	height: 5rem !important;
+}
+.form-heading {
+	font-size: 2rem;
+	font-weight: 400;
+}
