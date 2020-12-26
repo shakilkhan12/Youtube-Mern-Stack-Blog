@@ -21,7 +21,8 @@
     "express-validator": "^6.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.4",
-    "node-sass": "^5.0.0"
+    "node-sass": "^5.0.0",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
