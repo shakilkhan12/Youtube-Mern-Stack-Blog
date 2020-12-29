@@ -3,4 +3,13 @@
 	height: calc(100vh - 8rem);
 	background: url('/images/background.jpg');
 	background-size: cover;
+
+	@include responsive(mobile){
+	   width: 0;
+	   height: 0;
+	}
+	@include responsive(tablet){
+		width: 0;
+		height: 0;
+	 }
 }

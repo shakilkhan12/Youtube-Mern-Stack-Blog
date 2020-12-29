@@ -1,6 +1,18 @@
 .container {
 	width: 1200px;
 	margin: 0 auto;
+	@include responsive(mobile){
+	  width: 100%;
+	  padding: 0 2rem;
+	}
+	@include responsive(tablet) {
+		width: 100%;
+	  padding: 0 2rem;
+	}
+	@include responsive(laptop) {
+		width: 100%;
+	  padding: 0 2rem;
+	}
 }
 .mt-80 {
 	margin-top: 8rem;
