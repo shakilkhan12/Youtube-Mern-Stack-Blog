@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { postRegister } from '../../store/asyncMethods/AuthMethods';
-const Register = () => {
+const Register = (props) => {
 	const [state, setState] = useState({
 		name: '',
 		email: '',
 		password: '',
 	});
-	const { loading, registerErrors } = useSelector((state) => state.AuthReducer);
+	const { loading, registerErrors, user } = useSelector(
+		(state) => state.AuthReducer
+	);
 
 	const dispatch = useDispatch();
 	const handleInputs = (e) => {
@@ -27,6 +29,9 @@ const Register = () => {
 	useEffect(() => {
 		if (registerErrors.length > 0) {
 			registerErrors.map((error) => toast.error(error.msg));
+		}
+		if (user) {
+			props.history.push('/dashboard');
 		}
 	}, [registerErrors]);
 	return (

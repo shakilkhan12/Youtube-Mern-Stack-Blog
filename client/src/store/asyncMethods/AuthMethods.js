@@ -8,9 +8,9 @@ export const postRegister = (state) => {
 		};
 		dispatch({ type: 'SET_LOADER' });
 		try {
-			const response = await axios.post('/register', state, config);
+			const { data } = await axios.post('/register', state, config);
 			dispatch({ type: 'CLOSE_LOADER' });
-			console.log(response);
+			localStorage.setItem('myToken', data.token);
 		} catch (error) {
 			dispatch({ type: 'CLOSE_LOADER' });
 			dispatch({
