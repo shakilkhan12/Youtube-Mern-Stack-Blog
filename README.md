@@ -27,12 +27,12 @@
     <img src="/Youtube.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">BLOG MERN Stack Course</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    MERN Stack course tutorials from scratch
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://www.youtube.com/playlist?list=PLZdXBpi-l7C7cle-FNXQuYnYl2mdPe_o1"><strong>here is Youtube playlist »</strong></a>
     <br />
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
