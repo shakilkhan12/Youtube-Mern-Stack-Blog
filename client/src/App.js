@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
 import PrivateRoute from './private/PrivateRoute';
 import RouteLinks from './private/RouteLinks';
+import NotFound from './components/NotFound';
 import Store from './store';
 function App() {
 	return (
@@ -15,10 +16,11 @@ function App() {
 			<Router>
 				<Navbar />
 				<Switch>
-					<RouteLinks path='/' exact component={Home} />
+					<Route path='/' exact component={Home} />
 					<RouteLinks path='/register' exact component={Register} />
 					<RouteLinks path='/login' exact component={Login} />
 					<PrivateRoute path='/dashboard' exact component={Dashboard} />
+					<Route component={NotFound} />
 				</Switch>
 			</Router>
 		</Provider>

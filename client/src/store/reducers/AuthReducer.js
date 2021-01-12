@@ -4,6 +4,7 @@ import {
 	CLOSE_LOADER,
 	SET_TOKEN,
 	REGISTER_ERRORS,
+	LOGOUT,
 } from '../types/UserTypes';
 const initState = {
 	loading: false,
@@ -20,11 +21,6 @@ const verifyToken = (token) => {
 	} else {
 		return decodeToken;
 	}
-	// else {
-	// 	initState.token = token;
-	// 	const { user } = decodeToken;
-	// 	initState.user = user;
-	// }
 };
 const token = localStorage.getItem('myToken');
 if (token) {
@@ -45,6 +41,8 @@ const AuthReducer = (state = initState, action) => {
 		const decoded = verifyToken(action.payload);
 		const { user } = decoded;
 		return { ...state, token: action.payload, user: user };
+	} else if (action.type === LOGOUT) {
+		return { ...state, token: '', user: '' };
 	} else {
 		return state;
 	}

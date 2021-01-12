@@ -1,14 +1,23 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { LOGOUT } from '../store/types/UserTypes';
 const Navbar = () => {
 	const { user } = useSelector((state) => state.AuthReducer);
+	const dispatch = useDispatch();
+	const logout = () => {
+		localStorage.removeItem('myToken');
+		dispatch({ type: LOGOUT });
+	};
 	const Links = user ? (
 		<div className='navbar__right'>
 			<li>
-				<Link to='/'>{user.name}</Link>
+				<Link to='/create'>Create Post</Link>
 			</li>
 			<li>
-				<Link to='/logout'>Logout</Link>
+				<Link to='/dashboard'>{user.name}</Link>
+			</li>
+			<li>
+				<span onClick={logout}>Logout</span>
 			</li>
 		</div>
 	) : (
