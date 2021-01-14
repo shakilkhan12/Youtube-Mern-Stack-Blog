@@ -25,7 +25,6 @@ export const postRegister = (state) => {
 				type: REGISTER_ERRORS,
 				payload: error.response.data.errors,
 			});
-			console.log(error.response);
 		}
 	};
 };
@@ -45,7 +44,6 @@ export const postLogin = (state) => {
 		} catch (error) {
 			dispatch({ type: CLOSE_LOADER });
 			dispatch({ type: LOGIN_ERRORS, payload: error.response.data.errors });
-			console.log(error.response);
 		}
 	};
 };
