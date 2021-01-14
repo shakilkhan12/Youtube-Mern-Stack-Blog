@@ -5,6 +5,7 @@ import {
 	SET_TOKEN,
 	REGISTER_ERRORS,
 	LOGOUT,
+	LOGIN_ERRORS,
 } from '../types/UserTypes';
 const initState = {
 	loading: false,
@@ -40,9 +41,20 @@ const AuthReducer = (state = initState, action) => {
 	} else if (action.type === SET_TOKEN) {
 		const decoded = verifyToken(action.payload);
 		const { user } = decoded;
-		return { ...state, token: action.payload, user: user };
+		return {
+			...state,
+			token: action.payload,
+			user: user,
+			loginErrors: [],
+			registerErrors: [],
+		};
 	} else if (action.type === LOGOUT) {
 		return { ...state, token: '', user: '' };
+	} else if (action.type === LOGIN_ERRORS) {
+		return {
+			...state,
+			loginErrors: action.payload,
+		};
 	} else {
 		return state;
 	}
