@@ -1,9 +1,11 @@
-@import 'scss/base/reset';
 
 // import scss abstracts
 @import 'scss/abstracts/variables';
 @import 'scss/abstracts/mixin';
 @import "scss/abstracts/extends";
+
+// import base
+@import 'scss/base/reset';
 
 // import scss utils
 @import 'scss/utils/utils';
