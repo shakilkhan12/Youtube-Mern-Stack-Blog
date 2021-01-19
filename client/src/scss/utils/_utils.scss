@@ -20,6 +20,26 @@
 .mt-100 {
 	margin-top: 10rem;
 }
+.p-15 {
+	padding: 1.5rem;
+}
+.ml-minus-15 {
+	margin-left: -1.5rem;
+}
+.mr-minus-15 {
+	margin-left: -1.5rem;
+}
+.imagePreivew {
+	width: 100%;
+	height: auto;
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+.length {
+	font-size: 1.5rem;
+}
 .group {
 	margin-bottom: 1.3rem;
 	&__control {

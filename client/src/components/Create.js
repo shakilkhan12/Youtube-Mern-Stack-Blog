@@ -5,19 +5,53 @@ import 'react-quill/dist/quill.snow.css';
 
 const Create = () => {
 	const [currentImage, setCurrentImage] = useState('Choose image');
+	const [imagePreview, setImagePreview] = useState('');
 	const fileHandle = (e) => {
 		setCurrentImage(e.target.files[0].name);
+		setState({
+			...state,
+			[e.target.name]: e.target.files[0],
+		});
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			setImagePreview(reader.result);
+		};
+		reader.readAsDataURL(e.target.files[0]);
 	};
 	const [state, setState] = useState({
 		title: '',
+		description: '',
+		image: '',
 	});
-	const handleInputs = (e) => {
+	const handleDescription = (e) => {
 		setState({
 			...state,
 			[e.target.name]: e.target.value,
 		});
 	};
+	const [slug, setSlug] = useState('');
+	const [slugButton, setSlugButton] = useState(false);
+	const slugHandle = (e) => {
+		setSlugButton(true);
+		setSlug(e.target.value);
+	};
+	const handleURL = (e) => {
+		e.preventDefault();
+		setSlug(slug.trim().split(' ').join('-'));
+	};
+	const handleInput = (e) => {
+		setState({
+			...state,
+			[e.target.name]: e.target.value,
+		});
+		const createSlug = e.target.value.trim().split(' ').join('-');
+		setSlug(createSlug);
+	};
 	const [value, setValue] = useState('');
+	const createPost = (e) => {
+		e.preventDefault();
+		console.log(state);
+	};
 	return (
 		<div className='create mt-100'>
 			<Helmet>
@@ -25,11 +59,12 @@ const Create = () => {
 				<meta name='description' content='Create a new post' />
 			</Helmet>
 			<div className='container'>
-				<div className='row'>
-					<div className='col-6'>
-						<div className='card'>
-							<h3 className='card__h3'>Create a new post</h3>
-							<form>
+				<form onSubmit={createPost}>
+					<div className='row ml-minus-15 mr-minus-15'>
+						<div className='col-6 p-15'>
+							<div className='card'>
+								<h3 className='card__h3'>Create a new post</h3>
+
 								<div className='group'>
 									<label htmlFor='title'>Post Title</label>
 									<input
@@ -37,7 +72,7 @@ const Create = () => {
 										name='title'
 										id='title'
 										value={state.title}
-										onChange={handleInputs}
+										onChange={handleInput}
 										className='group__control'
 										placeholder='Post title...'
 									/>
@@ -48,19 +83,20 @@ const Create = () => {
 									</label>
 									<input
 										type='file'
-										name='picture'
+										name='image'
 										id='image'
 										onChange={fileHandle}
 									/>
 								</div>
 								<div className='group'>
-									<label htmlFor='body'>
-										<ReactQuill
-											theme='snow'
-											value={value}
-											onChange={setValue}
-										/>
-									</label>
+									<label htmlFor='body'>Post body</label>
+									<ReactQuill
+										theme='snow'
+										id='body'
+										placeholder='Post body...'
+										value={value}
+										onChange={setValue}
+									/>
 								</div>
 								<div className='group'>
 									<input
@@ -69,10 +105,56 @@ const Create = () => {
 										className='btn btn-default btn-block'
 									/>
 								</div>
-							</form>
+							</div>
+						</div>
+						<div className='col-6 p-15'>
+							<div className='card'>
+								<div className='group'>
+									<label htmlFor='slug'>Post URL</label>
+									<input
+										type='text'
+										name='slug'
+										id='slug'
+										value={slug}
+										onChange={slugHandle}
+										className='group__control'
+										placeholder='Post URL...'
+									/>
+								</div>
+								<div className='group'>
+									{slugButton ? (
+										<button class='btn btn-default' onClick={handleURL}>
+											Update Slug
+										</button>
+									) : (
+										''
+									)}
+								</div>
+								<div className='group'>
+									<div className='imagePreivew'>
+										{imagePreview ? <img src={imagePreview} /> : ''}
+									</div>
+								</div>
+								<div className='group'>
+									<label htmlFor='description'>Meta Description</label>
+									<textarea
+										name='description'
+										id='description'
+										cols='30'
+										rows='10'
+										defaultValue={state.description}
+										onChange={handleDescription}
+										className='group__control'
+										placeholder='meta description...'
+										maxLength='150'></textarea>
+									<p className='length'>
+										{state.description ? state.description.length : 0}
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
