@@ -2,10 +2,16 @@ import { useState } from 'react';
 import Helmet from 'react-helmet';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createAction } from '../store/asyncMethods/PostMethods';
 
 const Create = () => {
 	const [currentImage, setCurrentImage] = useState('Choose image');
 	const [imagePreview, setImagePreview] = useState('');
+	const dispatch = useDispatch();
+	const {
+		user: { _id, name },
+	} = useSelector((state) => state.AuthReducer);
 	const fileHandle = (e) => {
 		setCurrentImage(e.target.files[0].name);
 		setState({
@@ -50,7 +56,16 @@ const Create = () => {
 	const [value, setValue] = useState('');
 	const createPost = (e) => {
 		e.preventDefault();
-		console.log(state);
+		const { title, description, image } = state;
+		const formData = new FormData();
+		formData.append('title', title);
+		formData.append('body', value);
+		formData.append('image', image);
+		formData.append('description', description);
+		formData.append('slug', slug);
+		formData.append('name', name);
+		formData.append('id', _id);
+		dispatch(createAction(formData));
 	};
 	return (
 		<div className='create mt-100'>
@@ -99,11 +114,20 @@ const Create = () => {
 									/>
 								</div>
 								<div className='group'>
-									<input
-										type='submit'
-										value='Create post'
-										className='btn btn-default btn-block'
-									/>
+									<label htmlFor='description'>Meta Description</label>
+									<textarea
+										name='description'
+										id='description'
+										cols='30'
+										rows='10'
+										defaultValue={state.description}
+										onChange={handleDescription}
+										className='group__control'
+										placeholder='meta description...'
+										maxLength='150'></textarea>
+									<p className='length'>
+										{state.description ? state.description.length : 0}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -135,21 +159,13 @@ const Create = () => {
 										{imagePreview ? <img src={imagePreview} /> : ''}
 									</div>
 								</div>
+
 								<div className='group'>
-									<label htmlFor='description'>Meta Description</label>
-									<textarea
-										name='description'
-										id='description'
-										cols='30'
-										rows='10'
-										defaultValue={state.description}
-										onChange={handleDescription}
-										className='group__control'
-										placeholder='meta description...'
-										maxLength='150'></textarea>
-									<p className='length'>
-										{state.description ? state.description.length : 0}
-									</p>
+									<input
+										type='submit'
+										value='Create post'
+										className='btn btn-default btn-block'
+									/>
 								</div>
 							</div>
 						</div>
