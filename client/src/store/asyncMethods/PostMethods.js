@@ -14,6 +14,7 @@ export const createAction = (postData) => {
 			dispatch({ type: CLOSE_LOADER });
 			console.log(data);
 		} catch (error) {
+			console.log(error.response);
 			const { errors } = error.response.data;
 			dispatch({ type: CLOSE_LOADER });
 			dispatch({ type: CREATE_ERRORS, payload: errors });
