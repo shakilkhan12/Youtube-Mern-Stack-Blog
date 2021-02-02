@@ -1,5 +1,14 @@
 import axios from 'axios';
-import { CREATE_ERRORS, SET_LOADER, CLOSE_LOADER } from '../types/PostTypes';
+import {
+	CREATE_ERRORS,
+	REMOVE_ERRORS,
+	SET_LOADER,
+	CLOSE_LOADER,
+	REDIRECT_TRUE,
+	REDIRECT_FALSE,
+	SET_MESSAGE,
+	REMOVE_MESSAGE,
+} from '../types/PostTypes';
 const token = localStorage.getItem('myToken');
 export const createAction = (postData) => {
 	return async (dispatch) => {
@@ -10,9 +19,13 @@ export const createAction = (postData) => {
 					Authorization: `Bearer ${token}`,
 				},
 			};
-			const { data } = await axios.post('/create_post', postData, config);
+			const {
+				data: { msg },
+			} = await axios.post('/create_post', postData, config);
 			dispatch({ type: CLOSE_LOADER });
-			console.log(data);
+			dispatch({ type: REMOVE_ERRORS });
+			dispatch({ type: REDIRECT_TRUE });
+			dispatch({ type: SET_MESSAGE, payload: msg });
 		} catch (error) {
 			console.log(error.response);
 			const { errors } = error.response.data;

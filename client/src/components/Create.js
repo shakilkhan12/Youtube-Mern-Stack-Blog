@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 import { createAction } from '../store/asyncMethods/PostMethods';
 
-const Create = () => {
+const Create = (props) => {
+	const { createErrors, redirect } = useSelector((state) => state.PostReducer);
 	const [currentImage, setCurrentImage] = useState('Choose image');
 	const [imagePreview, setImagePreview] = useState('');
 	const dispatch = useDispatch();
@@ -13,16 +15,18 @@ const Create = () => {
 		user: { _id, name },
 	} = useSelector((state) => state.AuthReducer);
 	const fileHandle = (e) => {
-		setCurrentImage(e.target.files[0].name);
-		setState({
-			...state,
-			[e.target.name]: e.target.files[0],
-		});
-		const reader = new FileReader();
-		reader.onloadend = () => {
-			setImagePreview(reader.result);
-		};
-		reader.readAsDataURL(e.target.files[0]);
+		if (e.target.files.length !== 0) {
+			setCurrentImage(e.target.files[0].name);
+			setState({
+				...state,
+				[e.target.name]: e.target.files[0],
+			});
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImagePreview(reader.result);
+			};
+			reader.readAsDataURL(e.target.files[0]);
+		}
 	};
 	const [state, setState] = useState({
 		title: '',
@@ -67,12 +71,29 @@ const Create = () => {
 		formData.append('id', _id);
 		dispatch(createAction(formData));
 	};
+	useEffect(() => {
+		if (redirect) {
+			props.history.push('/dashboard');
+		}
+		if (createErrors.length !== 0) {
+			createErrors.map((err) => toast.error(err.msg));
+		}
+	}, [createErrors, redirect]);
 	return (
 		<div className='create mt-100'>
 			<Helmet>
 				<title>Create new post</title>
 				<meta name='description' content='Create a new post' />
 			</Helmet>
+			<Toaster
+				position='top-right'
+				reverseOrder={false}
+				toastOptions={{
+					style: {
+						fontSize: '14px',
+					},
+				}}
+			/>
 			<div className='container'>
 				<form onSubmit={createPost}>
 					<div className='row ml-minus-15 mr-minus-15'>
