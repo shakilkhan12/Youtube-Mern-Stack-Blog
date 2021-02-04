@@ -19,6 +19,7 @@ const verifyToken = (token) => {
 	const expiresIn = new Date(decodeToken.exp * 1000);
 	if (new Date() > expiresIn) {
 		localStorage.removeItem('myToken');
+		return null;
 	} else {
 		return decodeToken;
 	}

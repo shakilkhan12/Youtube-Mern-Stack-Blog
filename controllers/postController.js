@@ -52,12 +52,10 @@ module.exports.createPost = (req, res) => {
 							userName: name,
 							userId: id,
 						});
-						return res
-							.status(200)
-							.json({
-								msg: 'Your post have been created successfully',
-								response,
-							});
+						return res.status(200).json({
+							msg: 'Your post has been created successfully',
+							response,
+						});
 					} catch (error) {
 						return res.status(500).json({ errors: error, msg: error.message });
 					}

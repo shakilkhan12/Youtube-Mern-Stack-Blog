@@ -79,6 +79,7 @@ const Create = (props) => {
 			createErrors.map((err) => toast.error(err.msg));
 		}
 	}, [createErrors, redirect]);
+
 	return (
 		<div className='create mt-100'>
 			<Helmet>

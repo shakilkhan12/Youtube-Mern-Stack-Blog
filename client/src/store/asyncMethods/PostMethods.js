@@ -9,9 +9,12 @@ import {
 	SET_MESSAGE,
 	REMOVE_MESSAGE,
 } from '../types/PostTypes';
-const token = localStorage.getItem('myToken');
+
 export const createAction = (postData) => {
-	return async (dispatch) => {
+	return async (dispatch, getState) => {
+		const {
+			AuthReducer: { token },
+		} = getState();
 		dispatch({ type: SET_LOADER });
 		try {
 			const config = {
