@@ -8,6 +8,7 @@ import {
 	REDIRECT_FALSE,
 	SET_MESSAGE,
 	REMOVE_MESSAGE,
+	SET_POSTS,
 } from '../types/PostTypes';
 
 export const createAction = (postData) => {
@@ -34,6 +35,28 @@ export const createAction = (postData) => {
 			const { errors } = error.response.data;
 			dispatch({ type: CLOSE_LOADER });
 			dispatch({ type: CREATE_ERRORS, payload: errors });
+		}
+	};
+};
+export const fetchPosts = (id) => {
+	return async (dispatch, getState) => {
+		const {
+			AuthReducer: { token },
+		} = getState();
+		dispatch({ type: SET_LOADER });
+		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+			const {
+				data: { response },
+			} = await axios.get(`/posts/${id}`, config);
+			dispatch({ type: CLOSE_LOADER });
+			dispatch({ type: SET_POSTS, payload: response });
+		} catch (error) {
+			dispatch({ type: CLOSE_LOADER });
 		}
 	};
 };
