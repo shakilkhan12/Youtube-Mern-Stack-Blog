@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { REDIRECT_FALSE, REMOVE_MESSAGE } from '../store/types/PostTypes';
 import { fetchPosts } from '../store/asyncMethods/PostMethods';
 import { BsPencil, BsArchive } from 'react-icons/bs';
+import Loader from './Loader';
+import Sidebar from './Sidebar';
 const Dashboard = () => {
 	const { redirect, message, loading } = useSelector(
 		(state) => state.PostReducer
@@ -42,31 +44,32 @@ const Dashboard = () => {
 				}}
 			/>
 			<div className='container mt-100'>
-				<div className='row'>
-					<div className='col-3'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-						tenetur doloribus itaque. Dolores alias reprehenderit quasi error
-						provident itaque tenetur cumque sunt id sapiente. Expedita id
-						accusamus deleniti doloremque dolore.
+				<div className='row ml-minus-15 mr-minus-15'>
+					<div className='col-3 p-15'>
+						<Sidebar />
 					</div>
-					<div className='col-9'>
-						{!loading
-							? posts.length > 0
-								? posts.map((post) => (
-										<div className='dashboard__posts' key={post._id}>
-											<div className='dashboard__posts__title'>
-												<Link to='/'>{post.title}</Link>
-											</div>
-											<div className='dashboard__posts__links'>
-												<Link to='/'>
-													<BsPencil className='icon' />
-												</Link>
-												<BsArchive className='icon' />
-											</div>
+					<div className='col-9 p-15'>
+						{!loading ? (
+							posts.length > 0 ? (
+								posts.map((post) => (
+									<div className='dashboard__posts' key={post._id}>
+										<div className='dashboard__posts__title'>
+											<Link to='/'>{post.title}</Link>
 										</div>
-								  ))
-								: 'You dont have any post'
-							: 'loading...'}
+										<div className='dashboard__posts__links'>
+											<Link to='/'>
+												<BsPencil className='icon' />
+											</Link>
+											<BsArchive className='icon' />
+										</div>
+									</div>
+								))
+							) : (
+								'You dont have any post'
+							)
+						) : (
+							<Loader />
+						)}
 					</div>
 				</div>
 			</div>

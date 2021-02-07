@@ -1,5 +1,5 @@
 .dashboard__posts:first-child {
-    border-top: 1px solid #e5e7ed!important;
+    border-top: 1px solid $silverLight!important;
     border-top-left-radius: .6rem;
     border-top-right-radius: .6rem;
 }
@@ -10,7 +10,7 @@
 .dashboard__posts {
     background: $white;
     padding: 2rem 1.3rem;
-    border: 1px solid #e5e7ed;
+    border: 1px solid $silverLight;
     border-top: none;
     display: flex;
     align-items: center;
