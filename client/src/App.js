@@ -20,7 +20,7 @@ function App() {
 					<Route path='/' exact component={Home} />
 					<RouteLinks path='/register' exact component={Register} />
 					<RouteLinks path='/login' exact component={Login} />
-					<PrivateRoute path='/dashboard' exact component={Dashboard} />
+					<PrivateRoute path='/dashboard/:page?' exact component={Dashboard} />
 					<PrivateRoute path='/create' exact component={Create} />
 					<Route component={NotFound} />
 				</Switch>

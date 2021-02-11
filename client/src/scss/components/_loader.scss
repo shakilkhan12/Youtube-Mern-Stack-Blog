@@ -10,7 +10,7 @@
         border-left: .4rem dotted $green;
         border-bottom: .4rem dotted $green;
         border-right: .4rem solid transparent;
-        animation: loader .5s linear;
+        animation: loader .5s infinite;
         @keyframes loader {
             100% {
                 transform: rotate(360deg);
