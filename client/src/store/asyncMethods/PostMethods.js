@@ -9,6 +9,8 @@ import {
 	SET_MESSAGE,
 	REMOVE_MESSAGE,
 	SET_POSTS,
+	SET_POST,
+	POST_REQUEST,
 } from '../types/PostTypes';
 
 export const createAction = (postData) => {
@@ -57,6 +59,30 @@ export const fetchPosts = (id, page) => {
 			dispatch({ type: SET_POSTS, payload: { response, count, perPage } });
 		} catch (error) {
 			dispatch({ type: CLOSE_LOADER });
+		}
+	};
+};
+export const fetchPost = (id) => {
+	return async (dispatch, getState) => {
+		const {
+			AuthReducer: { token },
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		dispatch({ type: SET_LOADER });
+		try {
+			const {
+				data: { post },
+			} = await axios.get(`/post/${id}`, config);
+			dispatch({ type: CLOSE_LOADER });
+			dispatch({ type: SET_POST, payload: post });
+			dispatch({ type: POST_REQUEST });
+		} catch (error) {
+			dispatch({ type: CLOSE_LOADER });
+			console.log(error.message);
 		}
 	};
 };

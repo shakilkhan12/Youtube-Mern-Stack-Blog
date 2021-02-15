@@ -80,3 +80,13 @@ module.exports.fetchPosts = async (req, res) => {
 		return res.status(500).json({ errors: error, msg: error.message });
 	}
 };
+module.exports.fetchPost = async (req, res) => {
+	const id = req.params.id;
+	try {
+		const post = await Post.findOne({ _id: id });
+		return res.status(200).json({ post });
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ errors: error, msg: error.message });
+	}
+};

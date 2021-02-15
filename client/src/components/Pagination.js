@@ -44,12 +44,15 @@ const Pagination = ({ count, page, perPage }) => {
 			);
 		}
 	};
-	return (
+
+	return totalPages ? (
 		<div className='pagination'>
 			{prev()}
 			{links()}
 			{next()}
 		</div>
+	) : (
+		''
 	);
 };
 export default Pagination;
