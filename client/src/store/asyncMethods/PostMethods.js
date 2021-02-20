@@ -11,6 +11,8 @@ import {
 	SET_POSTS,
 	SET_POST,
 	POST_REQUEST,
+	EDIT_ERRORS,
+	SET_UPDATE_ERRORS,
 } from '../types/PostTypes';
 
 export const createAction = (postData) => {
@@ -83,6 +85,34 @@ export const fetchPost = (id) => {
 		} catch (error) {
 			dispatch({ type: CLOSE_LOADER });
 			console.log(error.message);
+		}
+	};
+};
+export const updateAction = (editData) => {
+	return async (dispatch, getState) => {
+		const {
+			AuthReducer: { token },
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		dispatch({ type: SET_LOADER });
+		try {
+			const { data } = await axios.post('/update', editData, config);
+			dispatch({ type: CLOSE_LOADER });
+			dispatch({ type: REDIRECT_TRUE });
+			dispatch({ type: SET_MESSAGE, payload: data.msg });
+		} catch (error) {
+			const {
+				response: {
+					data: { errors },
+				},
+			} = error;
+			dispatch({ type: CLOSE_LOADER });
+			dispatch({ type: SET_UPDATE_ERRORS, payload: errors });
+			console.log(error.response);
 		}
 	};
 };

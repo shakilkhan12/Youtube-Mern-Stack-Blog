@@ -11,6 +11,9 @@ import {
 	SET_POST,
 	POST_REQUEST,
 	POST_RESET,
+	RESET_UPDATE,
+	SET_UPDATE_ERRORS,
+	RESET_UPDATE_ERRORS,
 } from '../types/PostTypes';
 const initState = {
 	loading: false,
@@ -22,6 +25,7 @@ const initState = {
 	count: 0,
 	post: {},
 	postStatus: false,
+	editErrors: [],
 };
 export const PostReducer = (state = initState, action) => {
 	const { type, payload } = action;
@@ -66,6 +70,19 @@ export const FetchPost = (state = initState, action) => {
 		return { ...state, postStatus: true };
 	} else if (type === POST_RESET) {
 		return { ...state, postStatus: false };
+	} else {
+		return state;
+	}
+};
+export const UpdatePost = (state = initState, action) => {
+	const { type, payload } = action;
+	if (type === SET_UPDATE_ERRORS) {
+		return { ...state, editErrors: payload };
+	} else if (type === RESET_UPDATE_ERRORS) {
+		return {
+			...state,
+			editErrors: [],
+		};
 	} else {
 		return state;
 	}

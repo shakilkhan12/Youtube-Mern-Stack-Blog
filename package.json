@@ -20,6 +20,8 @@
     "express": "^4.17.1",
     "express-validator": "^6.8.0",
     "formidable": "^1.2.2",
+    "html-react-parser": "^1.2.4",
+    "html-to-text": "^7.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.4",
     "node-sass": "^5.0.0",
