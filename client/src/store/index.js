@@ -7,6 +7,7 @@ import {
 	FetchPosts,
 	FetchPost,
 	UpdatePost,
+	UpdateImage,
 } from './reducers/PostReducer';
 const rootReducers = combineReducers({
 	AuthReducer,
@@ -14,6 +15,7 @@ const rootReducers = combineReducers({
 	FetchPosts,
 	FetchPost,
 	UpdatePost,
+	UpdateImage,
 });
 const middlewares = [thunkMiddleware];
 const Store = createStore(

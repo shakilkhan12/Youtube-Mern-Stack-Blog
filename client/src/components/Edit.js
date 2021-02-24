@@ -11,9 +11,9 @@ import {
 	RESET_UPDATE,
 	RESET_UPDATE_ERRORS,
 } from '../store/types/PostTypes';
+import Loader from './Loader';
 const Edit = () => {
 	const { push } = useHistory();
-	const { Quill } = ReactQuill;
 	const { id } = useParams();
 	const [value, setValue] = useState('');
 	const [state, setState] = useState({
@@ -50,6 +50,7 @@ const Edit = () => {
 	useEffect(() => {
 		if (editErrors.length !== 0) {
 			editErrors.map((error) => toast.error(error.msg));
+			dispatch({ type: RESET_UPDATE_ERRORS });
 		}
 	}, [editErrors]);
 	useEffect(() => {
@@ -57,7 +58,7 @@ const Edit = () => {
 			push('/dashboard');
 		}
 	}, [redirect]);
-	return (
+	return !loading ? (
 		<div className='mt-100'>
 			<Helmet>
 				<title>Edit post</title>
@@ -136,6 +137,8 @@ const Edit = () => {
 				</div>
 			</div>
 		</div>
+	) : (
+		<Loader />
 	);
 };
 export default Edit;
