@@ -13,6 +13,7 @@ const Pagination = ({ count, page, perPage }) => {
 	}
 	const links = () => {
 		const store = [];
+
 		for (let i = startLoop; i <= endLoop; i++) {
 			store.push(
 				<li key={i} className={i == page ? 'active' : ''}>
@@ -45,7 +46,7 @@ const Pagination = ({ count, page, perPage }) => {
 		}
 	};
 
-	return totalPages ? (
+	return totalPages && count > 3 ? (
 		<div className='pagination'>
 			{prev()}
 			{links()}
