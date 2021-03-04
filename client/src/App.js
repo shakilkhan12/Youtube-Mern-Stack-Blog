@@ -12,6 +12,7 @@ import NotFound from './components/NotFound';
 import Create from './components/Create';
 import Edit from './components/Edit';
 import EditImage from './components/EditImage';
+import UpdateName from './components/UpdateName';
 import Store from './store';
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 					<PrivateRoute path='/create' exact component={Create} />
 					<PrivateRoute path='/edit/:id' exact component={Edit} />
 					<PrivateRoute path='/updateImage/:id' exact component={EditImage} />
+					<PrivateRoute path='/updateName' exact component={UpdateName} />
 					<Route component={NotFound} />
 				</Switch>
 			</Router>
