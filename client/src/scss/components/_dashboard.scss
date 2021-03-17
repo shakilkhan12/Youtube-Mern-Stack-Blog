@@ -21,6 +21,13 @@
         font-size: 1.6rem;
         color: $black;
         }
+        span {
+            display: block;
+            font-size: 1.4rem;
+            color: silver;
+            margin-top: .3rem;
+            font-weight: 300;
+        }
     }
     &__links {
         width: 30%;
