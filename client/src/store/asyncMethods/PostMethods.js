@@ -27,6 +27,13 @@ export const createAction = (postData) => {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
+				// onUploadProgress: (data) => {
+
+				// 	console.log(
+				// 		'Your image upload progress: ',
+				// 		Math.round((100 * data.loaded) / data.total)
+				// 	);
+				// },
 			};
 			const {
 				data: { msg },

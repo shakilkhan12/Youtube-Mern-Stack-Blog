@@ -14,6 +14,7 @@ import Edit from './components/Edit';
 import EditImage from './components/EditImage';
 import UpdateName from './components/UpdateName';
 import Store from './store';
+import ChangePassword from './components/ChangePassword';
 function App() {
 	return (
 		<Provider store={Store}>
@@ -28,6 +29,11 @@ function App() {
 					<PrivateRoute path='/edit/:id' exact component={Edit} />
 					<PrivateRoute path='/updateImage/:id' exact component={EditImage} />
 					<PrivateRoute path='/updateName' exact component={UpdateName} />
+					<PrivateRoute
+						path='/updatePassword'
+						exact
+						component={ChangePassword}
+					/>
 					<Route component={NotFound} />
 				</Switch>
 			</Router>
