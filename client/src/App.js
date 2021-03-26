@@ -22,6 +22,7 @@ function App() {
 				<Navbar />
 				<Switch>
 					<Route path='/' exact component={Home} />
+					<Route path='/home/:page' exact component={Home} />
 					<RouteLinks path='/register' exact component={Register} />
 					<RouteLinks path='/login' exact component={Login} />
 					<PrivateRoute path='/dashboard/:page?' exact component={Dashboard} />
