@@ -15,6 +15,7 @@ import EditImage from './components/EditImage';
 import UpdateName from './components/UpdateName';
 import Store from './store';
 import ChangePassword from './components/ChangePassword';
+import Details from './components/Details';
 function App() {
 	return (
 		<Provider store={Store}>
@@ -22,6 +23,7 @@ function App() {
 				<Navbar />
 				<Switch>
 					<Route path='/' exact component={Home} />
+					<Route path='/details/:id' exact component={Details} />
 					<Route path='/home/:page' exact component={Home} />
 					<RouteLinks path='/register' exact component={Register} />
 					<RouteLinks path='/login' exact component={Login} />
