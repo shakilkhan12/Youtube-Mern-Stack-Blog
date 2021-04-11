@@ -50,7 +50,7 @@ const Home = () => {
 												</div>
 												<div className='post__body'>
 													<h1 className='post__body__title'>
-														<Link to={`/details/${post._id}`}>
+														<Link to={`/details/${post.slug}`}>
 															{post.title}
 														</Link>
 													</h1>

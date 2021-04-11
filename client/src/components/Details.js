@@ -1,14 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { htmlToText } from 'html-to-text';
+import Helmet from 'react-helmet';
 import { postDetails } from '../store/asyncMethods/PostMethods';
 import Loader from './Loader';
 const Details = () => {
 	const { id } = useParams();
+	const [comment, setComment] = useState('');
+	const { user } = useSelector((state) => state.AuthReducer);
 	const { loading, details } = useSelector((state) => state.PostReducer);
 	const dispatch = useDispatch();
+	const addComment = (e) => {
+		e.preventDefault();
+		console.log(comment);
+	};
 	useEffect(() => {
 		dispatch(postDetails(id));
 	}, [id]);
@@ -18,6 +25,9 @@ const Details = () => {
 				<div className='col-8'>
 					{!loading ? (
 						<div className='post__details'>
+							<Helmet>
+								<title>{details.title}</title>
+							</Helmet>
 							<div className='post__header'>
 								<div className='post__header__avator'>
 									{details.userName ? details.userName[0] : ''}
@@ -32,7 +42,34 @@ const Details = () => {
 								<div className='post__body__details'>
 									{htmlToText(details.body)}
 								</div>
+								<div className='post__body__image'>
+									<img src={`/images/${details.image}`} alt={details.image} />
+								</div>
 							</div>
+							{user ? (
+								<div className='post__comment'>
+									<form onSubmit={addComment}>
+										<div className='group'>
+											<input
+												type='text'
+												className='group__control'
+												placeholder='Write a comment...'
+												onChange={(e) => setComment(e.target.value)}
+												value={comment}
+											/>
+										</div>
+										<div className='group'>
+											<input
+												type='submit'
+												value='Post comment'
+												className='btn btn-default'
+											/>
+										</div>
+									</form>
+								</div>
+							) : (
+								''
+							)}
 						</div>
 					) : (
 						<Loader />
