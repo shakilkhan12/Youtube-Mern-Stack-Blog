@@ -4,17 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { htmlToText } from 'html-to-text';
 import Helmet from 'react-helmet';
-import { postDetails } from '../store/asyncMethods/PostMethods';
+import { postDetails, postComment } from '../store/asyncMethods/PostMethods';
 import Loader from './Loader';
+import Comments from './Comments';
 const Details = () => {
 	const { id } = useParams();
 	const [comment, setComment] = useState('');
 	const { user } = useSelector((state) => state.AuthReducer);
-	const { loading, details } = useSelector((state) => state.PostReducer);
+	const { loading, details, comments } = useSelector(
+		(state) => state.PostReducer
+	);
 	const dispatch = useDispatch();
 	const addComment = (e) => {
 		e.preventDefault();
-		console.log(comment);
+		dispatch(postComment({ id: details._id, comment, userName: user.name }));
+		setComment('');
+		dispatch(postDetails(id));
 	};
 	useEffect(() => {
 		dispatch(postDetails(id));
@@ -47,26 +52,29 @@ const Details = () => {
 								</div>
 							</div>
 							{user ? (
-								<div className='post__comment'>
-									<form onSubmit={addComment}>
-										<div className='group'>
-											<input
-												type='text'
-												className='group__control'
-												placeholder='Write a comment...'
-												onChange={(e) => setComment(e.target.value)}
-												value={comment}
-											/>
-										</div>
-										<div className='group'>
-											<input
-												type='submit'
-												value='Post comment'
-												className='btn btn-default'
-											/>
-										</div>
-									</form>
-								</div>
+								<>
+									<div className='post__comment'>
+										<form onSubmit={addComment}>
+											<div className='group'>
+												<input
+													type='text'
+													className='group__control'
+													placeholder='Write a comment...'
+													onChange={(e) => setComment(e.target.value)}
+													value={comment}
+												/>
+											</div>
+											<div className='group'>
+												<input
+													type='submit'
+													value='Post comment'
+													className='btn btn-default'
+												/>
+											</div>
+										</form>
+									</div>
+									<Comments comments={comments} />
+								</>
 							) : (
 								''
 							)}

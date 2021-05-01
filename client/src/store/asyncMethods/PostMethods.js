@@ -15,6 +15,7 @@ import {
 	SET_UPDATE_ERRORS,
 	UPDATE_IMAGE_ERROR,
 	SET_DETAILS,
+	COMMENTS,
 } from '../types/PostTypes';
 
 export const createAction = (postData) => {
@@ -175,11 +176,32 @@ export const postDetails = (id) => {
 		dispatch({ type: SET_LOADER });
 		try {
 			const {
-				data: { post },
+				data: { post, comments },
 			} = await axios.get(`/details/${id}`);
-			console.log(post);
 			dispatch({ type: CLOSE_LOADER });
 			dispatch({ type: SET_DETAILS, payload: post });
+			dispatch({ type: COMMENTS, payload: comments });
+		} catch (error) {
+			dispatch({ type: CLOSE_LOADER });
+			console.log(error);
+		}
+	};
+};
+export const postComment = (commentData) => {
+	return async (dispatch, getState) => {
+		const {
+			AuthReducer: { token },
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		dispatch({ type: SET_LOADER });
+		try {
+			const { data } = await axios.post('/comment', commentData, config);
+			dispatch({ type: CLOSE_LOADER });
+			console.log(data);
 		} catch (error) {
 			dispatch({ type: CLOSE_LOADER });
 			console.log(error);

@@ -10,6 +10,7 @@ const {
 	deletePost,
 	home,
 	postDetails,
+	postComment,
 } = require('../controllers/postController');
 const auth = require('../utils/auth');
 router.post('/create_post', auth, createPost);
@@ -20,4 +21,5 @@ router.get('/post/:id', auth, fetchPost);
 router.get('/delete/:id', auth, deletePost);
 router.get('/home/:page', home);
 router.get('/details/:id', postDetails);
+router.post('/comment', auth, postComment);
 module.exports = router;

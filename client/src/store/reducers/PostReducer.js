@@ -17,6 +17,7 @@ import {
 	UPDATE_IMAGE_ERROR,
 	RESET_UPDATE_IMAGE_ERRORS,
 	SET_DETAILS,
+	COMMENTS,
 } from '../types/PostTypes';
 const initState = {
 	loading: false,
@@ -31,6 +32,7 @@ const initState = {
 	editErrors: [],
 	updateImageErrors: [],
 	details: {},
+	comments: [],
 };
 export const PostReducer = (state = initState, action) => {
 	const { type, payload } = action;
@@ -52,6 +54,11 @@ export const PostReducer = (state = initState, action) => {
 		return { ...state, createErrors: [] };
 	} else if (type === SET_DETAILS) {
 		return { ...state, details: payload };
+	} else if (type === COMMENTS) {
+		return {
+			...state,
+			comments: payload,
+		};
 	} else {
 		return state;
 	}
