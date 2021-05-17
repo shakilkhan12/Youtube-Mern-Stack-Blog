@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import { createAction } from '../store/asyncMethods/PostMethods';
 import Loader from './Loader';
-
 const Create = (props) => {
 	const { createErrors, redirect, loading } = useSelector(
 		(state) => state.PostReducer

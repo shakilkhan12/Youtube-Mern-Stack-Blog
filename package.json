@@ -8,7 +8,7 @@
     "start":"node index.js",
     "client": "npm start --prefix client",
     "clientInstall": "npm install --prefix client",
-    "build":"npm run build --prefix client",
+    "build": "npm run build --prefix client",
     "heroku-postbuild":"npm run clientInstall && npm run build",
     "dev": "concurrently \" npm run server  \" \" npm run client \""
   },

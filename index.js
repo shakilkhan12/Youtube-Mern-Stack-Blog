@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const connect = require('./config/db');
 const router = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-const path = require('path');
 require('dotenv').config();
 const app = express();
 
