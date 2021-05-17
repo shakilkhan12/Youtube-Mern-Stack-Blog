@@ -20,6 +20,6 @@ router.get('/posts/:id/:page', auth, fetchPosts);
 router.get('/post/:id', auth, fetchPost);
 router.get('/delete/:id', auth, deletePost);
 router.get('/home/:page', home);
-router.get('/details/:id', postDetails);
+router.get('/explore/:id', postDetails);
 router.post('/comment', auth, postComment);
 module.exports = router;
