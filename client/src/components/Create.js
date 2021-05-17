@@ -97,6 +97,7 @@ const Create = (props) => {
 					},
 				}}
 			/>
+
 			{!loading ? (
 				<div className='container'>
 					<form onSubmit={createPost}>
